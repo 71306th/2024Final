@@ -49,10 +49,11 @@ public class TeleopUpper extends Command{
         if(controller.getXButtonPressed()) Constants.state = Constants.state == UpperState.AMP ? UpperState.DEFAULT : UpperState.AMP; endGaming = false;
         if(controller.getAButtonPressed()) Constants.state = Constants.state == UpperState.BASE ? UpperState.DEFAULT : UpperState.BASE; endGaming = false;
         if(controller.getBButtonPressed()) Constants.state = Constants.state == UpperState.FAR ? UpperState.DEFAULT : UpperState.FAR; endGaming = false;
-        if(controller.getLeftBumperPressed()) Constants.state = Constants.state == UpperState.TRANSPORT ? UpperState.DEFAULT : UpperState.TRANSPORT; endGaming = false;
-        if(controller.getRightBumperPressed()) Constants.state = Constants.state == UpperState.FLIGHT ? UpperState.FLIGHT : UpperState.FLIGHT; endGaming = false;
-        if(controller.getRightTriggerAxis() > 0.01) Constants.state = UpperState.SHOOT; endGaming = false;
-        if(controller.getRightTriggerAxis() < 0.01 && Constants.state == UpperState.SHOOT) Constants.state = UpperState.NULL;
+        if(controller.getRightBumperPressed()) Constants.state = Constants.state == UpperState.FLIGHT ? UpperState.DEFAULT : UpperState.FLIGHT; endGaming = false;
+        if(controller.getRightTriggerAxis() > 0.05) Constants.state = UpperState.SHOOT; endGaming = false;
+        if(controller.getRightTriggerAxis() < 0.05 && Constants.state == UpperState.SHOOT) Constants.state = UpperState.NULL;
+        if(controller.getLeftTriggerAxis() > 0.05) Constants.state = UpperState.MGROUND; endGaming = false;
+        if(controller.getLeftTriggerAxis() < 0.05 && Constants.state == UpperState.MGROUND) Constants.state = UpperState.DEFAULT; endGaming = false;
         if(controller.getStartButtonPressed() && oneTime == false) {
             counter = counter==2 ? 0 : counter+1;
             oneTime = true;
@@ -86,6 +87,12 @@ public class TeleopUpper extends Command{
                 else s_Upper.blink(12,41,235);
                 if(s_Upper.hasNote()) Constants.state = UpperState.DEFAULT;
                 break;
+            case MGROUND:
+                elbowAngle = UpperConstants.ELBOW_GROUND_POS;
+                intakeSpeed = UpperConstants.INTAKE_GROUND_SPEED;
+                shooterSpeed = UpperConstants.SHOOTER_GROUND_SPEED;
+                s_Upper.blink(255, 255, 255);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                break;
             case AMP:
                 elbowAngle = UpperConstants.ELBOW_AMP_POS;
                 intakeSpeed = 0;
@@ -106,17 +113,8 @@ public class TeleopUpper extends Command{
                 if(Math.abs(s_Upper.getShooterRPM()) > UpperConstants.SHOOTER_LEGAL_SPEED) s_Upper.setLED(0,255,0);
                 else s_Upper.charge(255,0,0, false);
                 break;
-            case TRANSPORT:
-                elbowAngle = UpperConstants.ELBOW_TRANSPORT_POS;
-                intakeSpeed = 0;
-                shooterSpeed = 0;
-                // s_Upper.setLED(183, 69, 255);
-                shooterSpeed = UpperConstants.SHOOTER_SHOOT_SPEED;
-                if(Math.abs(s_Upper.getShooterRPM()) > UpperConstants.SHOOTER_LEGAL_SPEED) s_Upper.setLED(0, 255, 0);
-                else s_Upper.charge(255, 0, 0, false);
-                break;
             case FLIGHT:
-                elbowAngle = UpperConstants.ELBOW_GROUND_POS;
+                elbowAngle = UpperConstants.ELBOW_FLIGHT_POS;
                 intakeSpeed = 0;
                 shooterSpeed = 0;
                 s_Upper.setLED(255, 255, 255);

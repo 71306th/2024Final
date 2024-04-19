@@ -70,7 +70,7 @@ public class UpperSub extends SubsystemBase{
 
     // elbow
     public double getElbowRotation() {
-        return elbowCancoder.getPosition().getValue();
+        return (elbowCancoder.getPosition().getValue() + UpperConstants.elbowCancoderOffset);
     }
 
     public void setElbow(double speed) {
@@ -145,6 +145,26 @@ public class UpperSub extends SubsystemBase{
             timer.restart();
         }
         led.setData(buffer);
+    }
+
+    public void gayPride() {
+        timer.start();
+        if(timer.get() < 0.1) {
+            for(int i=0;i<buffer.getLength()-1;i++) {
+                if((i+counter)%6 == 0) buffer.setRGB(i, 255, 0, 0);
+                if((i+counter)%6 == 1) buffer.setRGB(i, 255, 255, 0);
+                if((i+counter)%6 == 2) buffer.setRGB(i, 0, 255, 0);
+                if((i+counter)%6 == 3) buffer.setRGB(i, 0, 255, 255);
+                if((i+counter)%6 == 4) buffer.setRGB(i, 0, 0, 255);
+                if((i+counter)%6 == 5) buffer.setRGB(i, 255, 0, 255);
+            }
+        } else if(timer.get() < 0.2){}
+        else{
+            counter++;
+            timer.restart();
+        }
+        led.setData(buffer);
+        
     }
 
     public void charge(int r, int g, int b, boolean isTrap) { // from 24->31&23->16, then 15->0 

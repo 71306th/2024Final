@@ -38,8 +38,8 @@ public final class Constants {
     AMP,
     BASE,
     FAR,
-    TRANSPORT,
     FLIGHT,
+    MGROUND,
     SHOOT,
     TRAP,
     NULL,
@@ -85,9 +85,9 @@ public final class Constants {
     public static final int driveContinuousCurrentLimit = 40; //80, limiting the amps so Neo won't brake
 
     /* Angle Motor PID Values */
-    public static final double angleKP = 0.01;
+    public static final double angleKP = 0.010625;
     public static final double angleKI = 0.0;
-    public static final double angleKD = 0.0; // maybe need to adjust
+    public static final double angleKD = 0.005; // maybe need to adjust
 
     /* Angle Motor Auto-Facing PID Values */
     public static final double faceKP = 0.8;
@@ -146,7 +146,7 @@ public final class Constants {
       public static final int driveMotorID = 7;
       public static final int angleMotorID = 8;
       public static final int canCoderID = 6;
-      public static final Rotation2d angleOffset = Rotation2d.fromRotations(-0.166992);
+      public static final Rotation2d angleOffset = Rotation2d.fromRotations(-0.167236);
       public static final SwerveModuleConstants constants = new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
     }
 
@@ -155,7 +155,7 @@ public final class Constants {
       public static final int driveMotorID = 4;
       public static final int angleMotorID = 5;
       public static final int canCoderID = 9;
-      public static final Rotation2d angleOffset = Rotation2d.fromRotations(-0.609375);
+      public static final Rotation2d angleOffset = Rotation2d.fromRotations(-0.690918);
       public static final SwerveModuleConstants constants = new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
     }
     
@@ -200,6 +200,7 @@ public final class Constants {
     public static final int elbowCancoderID = 19;
     public static final int intakeMotorID = 22;
 
+    public static final double elbowCancoderOffset = -0.00709;
     public static final double shooter_arm_Angle = 135;
 
     public static final double elbowKP = 10;
@@ -214,14 +215,15 @@ public final class Constants {
     public static final double shooteriWindup = 0.0; // test
     public static final double shooteriLimit = 0.0; // test
 
-    public static final double ELBOW_DEFAULT_POS = -0.002197;
-    public static final double ELBOW_GROUND_POS = -0.24;
-    public static final double ELBOW_AMP_POS = 0.037109; // 1.0.012939 2.-0.002197
-    public static final double ELBOW_BASE_POS = -0.2;
-    public static final double ELBOW_FAR_POS = -0.185;
-    public static final double ELBOW_TRANSPORT_POS = -0.070312; // need to test
-    public static final double ELBOW_TRAP_POS = -0.226328;
-    public static final double ELBOW_PREENDGAME_POS = 0.075;
+    // 3/15 -0.01279(upper movement)
+    public static final double ELBOW_DEFAULT_POS = -0.103102; // -0.014987
+    public static final double ELBOW_GROUND_POS = -0.2425;
+    public static final double ELBOW_FLIGHT_POS = -0.235;
+    public static final double ELBOW_AMP_POS = 0.024319; // 1.0.012939 2.-0.002197
+    public static final double ELBOW_BASE_POS = -0.21279;
+    public static final double ELBOW_FAR_POS = -0.19779;
+    public static final double ELBOW_TRAP_POS = -0.2;
+    public static final double ELBOW_PREENDGAME_POS = 0.06221;
 
     public static final double INTAKE_HOLD_SPEED = 0;
     public static final double INTAKE_GROUND_SPEED = 0.35;
@@ -244,15 +246,15 @@ public final class Constants {
     // global
     public static final double shootingTime = 0.5;
     public static final double intakeTime = 3;
-    public static final double holdTime = 3;
+    public static final double holdTime = 2;
 
     // left speaker
-    public static final double leftSpeakerOffset = 30;
+    public static final double leftSpeakerOffset = 90;
 
     // mid speaker
     public static final double midSpeakerOffset = 0;
 
-    // right speaker
-    public static final double rightSpeakerOffset = -30;
+    // right speakerd
+    public static final double rightSpeakerOffset = 90;
   }
 }

@@ -12,6 +12,7 @@ import java.util.Map;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
@@ -98,7 +99,7 @@ public class Robot extends TimedRobot {
     m_AutoCommand.addOption("MBPX2X1X34n", "MBPX2X1X34n");
 
     // Choreo
-    // 添加ChoreoTrajectory到m_ChoreoTrajectories映射中
+    // 添加ChoreoTrajectory到m_ChoreoTrajectories
     m_ChoreoTrajectories.put("F1B", Choreo.getTrajectory("F1"));
     m_ChoreoTrajectories.put("F1B", Choreo.getTrajectory("F1B"));
 
